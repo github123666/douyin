@@ -1,0 +1,70 @@
+input,
+label {
+    padding: 0px;
+    margin: 0px;
+}
+
+#main {
+    width: 400px;
+    height: 100px;
+    margin: auto;
+    padding-top: 10px;
+}
+
+
+#progress_bar {
+    width: 80%;
+    word-break: keep-all;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#download_state {
+    display: flex;
+    line-height: 30px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#info {
+    margin-top: 10px;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+input {
+    margin-bottom: 10px;
+    padding-left: 8px;
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+input:hover {
+    border: 2px solid skyblue;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid skyblue;
+}
+
+
+.input_contain_div {
+    margin-top: 5px;
+}
+
+.download {
+    line-height: 30px;
+    border-radius: 10px;
+    cursor: default;
+    text-align: center;
+    background-color: greenyellow;
+}
+
+.download:hover {
+    background-color: rgb(157, 248, 22);
+}

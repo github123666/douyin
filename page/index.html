@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>download</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="main">
+        <form action="#">
+            <label for="save_place">保存位置 :</label>
+            <div class="input_contain_div"> <input type="text" placeholder="请输入文件保存位置" id="save_place">
+            </div>
+            <label for="user_input">下载链接(口令) :</label>
+            <div class="input_contain_div"> <input type="text" id="user_input" placeholder="https链接或口令"> </div>
+            <div class="download">下载</div>
+        </form>
+        <div id="info"></div>
+        <div id="download_state"></div>
+
+    </div>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        let info = document.getElementById("info")
+        let download_event = document.getElementsByClassName('download')[0]
+        // progress bar
+        let progressState = document.getElementById('download_state')
+        let nowTime = function () {
+            let time = new Date()
+            return time.toLocaleDateString() + " " + time.toLocaleTimeString()
+        }
+        let count = 1;
+        console.log(nowTime())
+        // listener click event
+        download_event.addEventListener('click', () => {
+            let path = document.getElementById('save_place').value
+            let download_link = document.getElementById('user_input').value
+            element = document.createElement('p')
+            element.textContent = `准备下载 启动任务${count} 开始时间${nowTime()}`
+            info.insertAdjacentElement('beforeend', element)
+            eel.user_input(download_link, path)
+            count += 1
+        })
+        // python function
+        eel.expose(write_file_name)
+        function write_file_name(content) {
+            let progress_bar = document.createElement('p')
+            progress_bar.textContent = '开始下载: ' + content
+            info.insertAdjacentElement('beforeend', progress_bar)
+        }
+        // download bar 
+        eel.expose(progressBar)
+        function progressBar(totalSize, download_size) {
+            download_percent = new String((Number((download_size / totalSize).toFixed(4)) * 100).toFixed(2)) + "%"
+            style = `background-color: skyblue; width:${download_percent}`
+            progress_html = `<div> 正在下载: </div> <div id="progress_bar"><div style="${style} ">${download_size + '/' + totalSize + "&nbsp&nbsp" + download_percent}</div> </div>`
+            progressState.innerHTML = progress_html
+        }
+
+    </script>
+</body>
+
+</html>
